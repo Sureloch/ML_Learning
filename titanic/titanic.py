@@ -1,7 +1,7 @@
 #4/4/2026
 #Diving into non-uniform data 
-# using the kaggle.com/c/titanic train.csv file
-# objective is to make a simple classification model to predict if the person would have survived or not
+#using the kaggle.com/c/titanic train.csv file
+#objective is to make a simple classification model to predict if the person would have survived or not
 
 
 #importing libs. 
@@ -88,7 +88,7 @@ class ClassificationModel(nn.Module): # nn from torch.nn
         return torch.sigmoid(self.layer_3(layer2_output))
 
 #create said model
-model = ClassificationModel(in_features = 6, out_features = 1)
+model = ClassificationModel(in_features = 7, out_features = 1)
 #set up loops and learning rate
 epochs = 1000
 lr = .01
@@ -101,7 +101,7 @@ optimizer = optim.Adam(model.parameters(), lr)
 for epoch in range(epochs):
     y_hat = model(x_train)
     loss = loss_fn(y_hat, y_train)
-    
+
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
@@ -110,14 +110,14 @@ for epoch in range(epochs):
         print(f"Epoch {epoch:02d}: Loss ={loss.item():.4f}")
 
 #Test Loop        
-for epoch in range(epochs):
-  y_hat = model(x_test)
-  predictions = y_hat >= 0.5
-  adjusted_predictions = predictions.squeeze(1)
-  comparision = torch.eq(adjusted_predictions, y_test)
-  print(len(comparision))
-  count = comparision.sum().item()
-  print(f"Number of True is {count}")
-  print(model.layer_1.weight)
-  print(f"Accuracy: {count/len(comparision):.4f}")  
+
+y_hat = model(x_test)
+predictions = y_hat >= 0.5
+adjusted_predictions = predictions.squeeze(1)
+comparision = torch.eq(adjusted_predictions, y_test)
+print(len(comparision))
+count = comparision.sum().item()
+print(f"Number of True is {count}")
+print(model.layer_1.weight)
+print(f"Accuracy: {count/len(comparision):.4f}")  
     

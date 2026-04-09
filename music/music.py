@@ -34,7 +34,9 @@ def format_and_standardize_data(df):
     'rock' : 9
     })
     #standarization    
+    #this mean get all std of each col, except the last 1
     std_values = df_formated.iloc[:, :-1].std()
+    #this mean get all mean of each col, except the last 1
     mean_values = df_formated.iloc[:, :-1].mean()
     print(std_values)
     print(mean_values)
@@ -75,7 +77,7 @@ class MultiClassificationModel(nn.Module):
         self.layer_1 = nn.Linear(in_features, in_features * 2)
         self.layer_2 = nn.Linear(in_features *2, in_features )
         self.layer_3 = nn.Linear(in_features, out_features)
-        self.dropout =  nn.Dropout(p = 0.25)
+        self.dropout =  nn.Dropout(p = 0.5)
         
     def forward(self, x):
         layer1_output = self.dropout(torch.relu(self.layer_1(x)))

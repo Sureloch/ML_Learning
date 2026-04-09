@@ -10,6 +10,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import math
 
 
 #makes the housing data as a dataframe
@@ -100,5 +101,6 @@ with torch.no_grad():
     y_hat = model(x_test)
     loss = loss_fn(y_hat, y_test)
     print(f"Test Epoch Loss ={loss.item():.4f}")
-            
+    print(f"{math.sqrt(loss)}")
+    
 model.train()
